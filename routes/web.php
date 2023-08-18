@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Comment\commentPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return view('perfect');
 });
+
+Route::get('/comments',[commentPostController::class,'index'])->name('comment.index');
+Route::get('/comments/{post}',[commentPostController::class,'show']);
+Route::post('/comments',[commentPostController::class,'store']);
+Route::delete('/comments/delete/{post}',[commentPostController::class,'destroy']);
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
