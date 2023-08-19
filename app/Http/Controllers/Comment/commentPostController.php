@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Comment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Comment\commentPost;
+use App\Models\Comment\commentComment;
 
 class commentPostController extends Controller
 {
@@ -26,5 +27,13 @@ class commentPostController extends Controller
     {
         $post->delete();
         return redirect('/comments');
+    }
+    public function comment(Request $request,commentComment $comment,commentPost $post)
+    {
+        $comment->comment = $request['comment'];
+        $comment->comment_post_id = $post->id;
+        $comment->user_id = \Auth::user()->id;
+        $comment->save();
+        return redirect('/comments/'.$post->id);
     }
 }
