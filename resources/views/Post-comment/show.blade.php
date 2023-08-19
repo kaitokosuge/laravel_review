@@ -6,9 +6,9 @@
         <div class="comment-area">
             <ul>
                 @foreach($post->comments as $comment)
-                <li>
-                    <p>{{ $comment->comment }}</p>
-                    <p>{{ $comment->user->name }}</p>
+                <li class="mt-5">
+                    <p>user:{{ $comment->user->name }}</p>
+                    <p class="font-bold">comment:<span class="text-4xl">{{ $comment->comment }}</span></p>
                 </li>
                 @endforeach
             </ul>

@@ -9,7 +9,7 @@
                         {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
                         <div class="flex items-center">
                             <img class="block w-[40px]"src="https://kaiton-blog.space/img/pen.png">
-                            <strong class="ml-5">★perfect blog★</strong>
+                            <strong class="ml-5 text-xl">Perfect Blog<span class="text-xs block"> for only pc</span></strong>
                         </div>
                     </a>
                 </div>
