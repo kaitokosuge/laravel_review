@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Comment\commentPostController;
+use App\Http\Controllers\Like\likePostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,10 @@ Route::post('/post/comment/{post}',[commentPostController::class,'comment']);
 
 //いいね機能
 Route::get('/likes',[likePostController::class,'index']);
-
+Route::post('/likes/post',[likePostController::class,'store']);
+Route::delete('/delete/post/{post}',[likePostController::class,'destroy']);
+//{post}でインスタンス変数$postのidを取得
+Route::post('/likes/{post}',[likePostController::class,'like']);
 
 
 Route::get('/dashboard', function () {

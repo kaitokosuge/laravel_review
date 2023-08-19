@@ -27,8 +27,31 @@
                     <p>いいねtable:like_likes</p>
                 </li>
             </ul>
-            <strong class="block mt-10">現物</strong>
-            
+            <strong class="text-2xl block mt-10">現物</strong>
+            <form action="/likes/post" method="post">
+                @csrf
+                <p>title</p>
+                <input class="bg-white rounded-md p-1 text-black"type="text"name="post[title]"/>
+                <button class="text-black font-bold p-[5px] bg-yellow-300 rounded-md"type="submit">保存</button>
+            </form>
+            <div class="grid mt-10 grid-cols-3 gap-5">
+                @foreach($posts as $post)
+                <article class="p-5 rounded-md bg-white text-black">
+                    <h2 class="font-bold text-3xl">{{ $post->title }}</h2>
+                    <div class="flex justify-between">
+                        <div>
+                            <a href="" class="text-blue-600 font-bold block">read</a>
+                            <form action={{"/delete/post/" . $post->id}} method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="block">削除</button>
+                            </form>
+                        </div>
+                        <a href="" class="block text-4xl">🖤</a>
+                    </div>
+                </article>
+                @endforeach
+            </div>
             <strong class="block mt-10">実装する際の考え方</strong>
             <ul>
                 <li class="mt-5">
