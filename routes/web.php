@@ -22,12 +22,15 @@ Route::get('/', function () {
     return view('perfect');
 });
 
+//投稿機能
 Route::get('/comments',[commentPostController::class,'index'])->name('comment.index');
 Route::get('/comments/{post}',[commentPostController::class,'show']);
 Route::post('/comments',[commentPostController::class,'store']);
 Route::delete('/comments/delete/{post}',[commentPostController::class,'destroy']);
-
 Route::post('/post/comment/{post}',[commentPostController::class,'comment']);
+
+//いいね機能
+Route::get('/likes',[likePostController::class,'index']);
 
 
 
