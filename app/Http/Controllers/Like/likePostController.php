@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Like;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Like\likePost;
+use App\Models\Like\likeLike;
 
 class likePostController extends Controller
 {
@@ -27,8 +28,17 @@ class likePostController extends Controller
         $post->delete();
         return redirect('/likes');
     }
-    public function like()
+    public function like(likeLike $like,likePost $post)
     {
-
+        $like->user_id = \Auth::id();
+        $like->like_post_id = $post->id;
+        $like->save();
+        return redirect('/likes');
+    }
+    public function unlike(likeLike $like,likePost $post)
+    {
+        $like = likeLike::where('like_post_id',$post->id)->where('user_id',\Auth::id());
+        $like->delete();
+        return redirect('/likes');
     }
 }
