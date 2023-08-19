@@ -21,7 +21,8 @@
                 </li>
                 <li class="mt-5">
                     <p>・migration</p>
-                    <p>table:comment_posts</p>
+                    <p>投稿table:comment_posts</p>
+                    <p>コメントtable:comment_comments</p>
                 </li>
             </ul>
             <strong class="block mt-10">現物</strong>

@@ -27,6 +27,8 @@ Route::get('/comments/{post}',[commentPostController::class,'show']);
 Route::post('/comments',[commentPostController::class,'store']);
 Route::delete('/comments/delete/{post}',[commentPostController::class,'destroy']);
 
+Route::post('/post/comment/{post}',[commentPostController::class,'comment']);
+
 
 
 Route::get('/dashboard', function () {
