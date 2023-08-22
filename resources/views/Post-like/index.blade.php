@@ -51,11 +51,14 @@
                             <form action={{ "/unlike/" . $post->id }} method="post">
                                 @csrf
                                 @method('DELETE')
+                                <p class="text-center font-bold">{{ $post->likes->count() }}</p>
                                 <button class="block text-4xl js-likeBtn">❤️</button>
+                            
                             </form>
                         @else
                             <form action={{"/like/" . $post->id}} method="post">
                                 @csrf
+                                <p class="text-center">{{ $post->likes->count() }}</p>
                                 <button type="submit" class="block text-4xl js-likeBtn">🖤</button>
                             </form>
                         @endif
@@ -66,8 +69,8 @@
             <strong class="block mt-10">実装する際の考え方</strong>
             <ul>
                 <li class="mt-5">
-                    <p>・投稿がいいねされている場合・されていない場合のボタン表示をif文で分岐させて表示を切り替える。</p>
-                    <p>$post->is_liked_by_user()</p>
+                    <p>・投稿がいいねされている場合・されていない場合のボタン表示をif文（ディレクティブ）で分岐させて表示を切り替える。</p>
+                    <p>・$post->is_liked_by_user()</p>
                     <p>$postからModelで定義した関数is_liked_by_user()を使っていいねされているかどうかをtrue,falseで返してもらう</p>
                     <p>is_liked_by_user()内ではまず認証済みのユーザー、つまりいいねを押そうとしている人自身のidを取得する。</p>
                     <p>次にpostsからlikesテーブルへのリレーションを使用しlikesテーブルにアクセス、likesテーブルからuser_idを抽出し配列に格納する</p>
@@ -75,7 +78,7 @@
                     <p></p>
                 </li>
                 <li class="mt-5">
-                    <p>・コントローラでユーザーid、記事idを保存で完了。delete操作はwhereでuser_id,post_idを指定し削除処理をする</p>
+                    <p>・コントローラでユーザーid、記事idを保存。delete操作はwhereでuser_id,post_idを指定し削除処理をする</p>
                 </li>
             </ul>
         </div>
@@ -117,6 +120,10 @@
                     
                 </li>
             </ul>
+        </div>
+        <div id="ajax"class="mt-[100px] border-t pt-10">
+            <h2 class="font-bold text-3xl">3.（JS FetchAPI使用）投稿に対して認証済みユーザーがいいねできる機能--Lv3</h2>
+            <strong class="block mt-10">使用ファイル</strong>
         </div>
     </div>
 </x-app-layout>

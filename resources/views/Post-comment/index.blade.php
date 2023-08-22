@@ -4,7 +4,7 @@
             <h1 class="font-bold text-8xl">Comment<span class="text-sm block mt-1">コメント機能</span></h1>
         </div>
         <div class="mt-[100px] border-t pt-5">
-            <h2 class="font-bold text-2xl">1.投稿に対して認証済みユーザーがコメントできる機能--Lv1</h2>
+            <h2 class="font-bold text-4xl">1.投稿に対して認証済みユーザーがコメントできる機能--Lv1</h2>
             <strong class="block mt-10">使用ファイル</strong>
             <ul>
                 <li class="mt-5">
@@ -61,5 +61,41 @@
                 </li>
             </ul>
         </div>
+        <div id="reply"class="mt-[100px] border-t pt-5">
+            <h2 class="font-bold text-4xl">2.投稿に対するコメントに返信できる機能--Lv2</h2>
+            <strong class="block mt-10">使用ファイル</strong>
+            <ul>
+                <li class="mt-5">
+                    <p>・Model</p>
+                    <p>Comment/commentReply.php</p>
+                </li>
+                <li class="mt-5">
+                    <p>・View</p>
+                    <p>Comment/show.blade.php</p>
+                </li>
+                <li class="mt-5">
+                    <p>・Controller</p>
+                    <p>Comment/commentPostController.php</p>
+                </li>
+                <li class="mt-5">
+                    <p>・migration</p>
+                    <p>返信table:comment_replies</p>
+                    <p>コメントtable:comment_comments</p>
+                </li>
+            </ul>
+            <strong class="block mt-10">現物は詳細ページ<a class="text-yellow-400"href="/comments/1">例</a></strong>
+            <strong class="block mt-10">実装する際の考え方</strong>
+            <ul>
+                <li class="mt-5">
+                    <p>・repliesテーブルに格納する必要があるもの</p>
+                    <p>返信（テキスト）、記事id、コメントid、ユーザーid</p>
+                    <p>・commentテーブルからreplyテーブルへのhasmanyリレーションで返信を配列で受け取りブレードで表示する</p>
+                    <p>・form actionに返信コメントのidと記事のidを乗せることでコントローラで各外部キーを格納させる</p>
+                </li>
+                <li class="mt-5">
+                    <p>・またコメントした記事のid(foreignId)を保存しておくことで記事に紐づいたコメントをリレーションで取り出し表示させることができる</p></p>
+                </li>
+            </ul>
+        </div>    
     </div>
 </x-app-layout>

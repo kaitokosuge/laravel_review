@@ -1,0 +1,10 @@
+.nav-link{
+    transition:.3s;
+}
+.nav-link:hover{
+    font-size:25px;
+    transition: .3s;
+}
+p{
+    line-height:1.9;
+}
