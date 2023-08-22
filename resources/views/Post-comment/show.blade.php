@@ -9,7 +9,18 @@
                 <li class="mt-5">
                     <p>user:{{ $comment->user->name }}</p>
                     <p class="font-bold">comment:<span class="text-4xl">{{ $comment->comment }}</span></p>
+                    <div>   
+                        @foreach($comment->replies as $reply) 
+                        <p>返信したユーザー{{ $reply->user->name }}</p>
+                        <p>{{ $reply->reply }}</p>
+                        @endforeach
+                    </div>
                 </li>
+                <form action={{"/reply/" . $post->id . "/{$comment->id}"}} method="post">
+                    @csrf
+                    <input class="text-black"type="text" name="reply[reply]"/>
+                    <button type="submit">送信</button>
+                </form>
                 @endforeach
             </ul>
         </div>

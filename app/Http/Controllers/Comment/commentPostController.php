@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Comment\commentPost;
 use App\Models\Comment\commentComment;
+use App\Models\Comment\commentReply;
+
 
 class commentPostController extends Controller
 {
@@ -34,6 +36,15 @@ class commentPostController extends Controller
         $comment->comment_post_id = $post->id;
         $comment->user_id = \Auth::user()->id;
         $comment->save();
-        return redirect('/comments/'.$post->id);
+        return redirect('/comments/' . $post->id);
+    }
+    public function reply(commentReply $reply,Request $request,commentPost $post,commentComment $comment)
+    {
+        $input = $request['reply'];
+        $reply->user_id = \Auth::id();
+        $reply->comment_post_id = $post->id;
+        $reply->comment_comment_id = $comment->id;
+        $reply->fill($input)->save();
+        return redirect('/comments/' . $post->id);
     }
 }
