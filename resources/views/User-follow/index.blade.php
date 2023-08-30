@@ -3,6 +3,22 @@
         <h1 class="font-bold text-8xl">Follow<span class="text-sm block mt-1">フォロー機能</span></h1>
         <div class="mt-[100px] border-t pt-5">
                 <h2 class="font-bold text-3xl">1.ユーザーが他のユーザーをフォローできる機能--Lv1</h2>
+                <strong class="block mt-10">現物</strong>
+                <p class="mt-5">ユーザ一覧</p>
+                <div class="text-black grid mt-10 grid-cols-3 gap-5">
+                    @foreach($users as $user)
+                    <div class="bg-white rounded-md p-5">
+                        <p class="text-xs">名前</p>
+                        <p class="font-bold ">{{ $user->name }}</p>
+                        <p class="text-xs">メールアドレス</p>
+                        <p class="font-bold ">{{ $user->email }}</p>
+                        <form action={{"/follow/" . $user->id}} method="post">
+                            @csrf
+                            <button type="submit" >フォローする</button>
+                        </form>
+                    </div>
+                    @endforeach
+                </div>
                 <strong class="block mt-10">実装する際の考え方</strong>
                 <ul>
                     <li class="mt-5">

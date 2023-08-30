@@ -12,4 +12,9 @@ class userFollowController extends Controller
     {
         return view('User-follow.index')->with(['users' => $user->get()]);
     }
+    public function follow()
+    {
+        
+        return redirect('/follows');
+    }
 }
