@@ -49,6 +49,9 @@ Route::delete('/unlike/{post}',[likePostController::class,'unlike']);
 フォロー機能
 */
 Route::get('/follows',[userFollowController::class,'index']);
+//ルートパラメータにはコントローラに渡す必要があるフォローされる人のidが入る。
+Route::post('/follow/{user}',[userFollowController::class,'follow']);
+Route::post('/unfollow/{user}',[userFollowController::class,'unfollow']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
