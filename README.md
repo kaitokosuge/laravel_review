@@ -1,3 +1,3 @@
 <h1>laravel　review</h1>
 <h2>about this project</h2>
-<strong>only this site</strong>
+<strong>9/21マルチログイン機能実装✨</strong>
