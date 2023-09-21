@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Str;
 
+
 return [
 
     /*
@@ -130,7 +131,7 @@ return [
         'SESSION_COOKIE',
         Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
     ),
-
+    'cookie_admin' => Str::slug(env('APP_NAME', 'laravel'), '_').'_session_admin', // 追加
     /*
     |--------------------------------------------------------------------------
     | Session Cookie Path
