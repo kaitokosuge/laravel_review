@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Comment\commentPostController;
 use App\Http\Controllers\Like\likePostController;
 use App\Http\Controllers\User\userFollowController;
+use App\Http\Controllers\Ogp\OgpController;
 
 
 /*
@@ -29,31 +30,33 @@ Route::get('/', function () {
 /*
 コメント機能
 */
-Route::get('/comments',[commentPostController::class,'index'])->name('comment.index');
-Route::get('/comments/{post}',[commentPostController::class,'show']);
-Route::post('/comments',[commentPostController::class,'store']);
-Route::delete('/comments/delete/{post}',[commentPostController::class,'destroy']);
-Route::post('/post/comment/{post}',[commentPostController::class,'comment']);
-Route::post('/reply/{post}/{comment}',[commentPostController::class,'reply']);
+Route::get('/comments', [commentPostController::class, 'index'])->name('comment.index');
+Route::get('/comments/{post}', [commentPostController::class, 'show']);
+Route::post('/comments', [commentPostController::class, 'store']);
+Route::delete('/comments/delete/{post}', [commentPostController::class, 'destroy']);
+Route::post('/post/comment/{post}', [commentPostController::class, 'comment']);
+Route::post('/reply/{post}/{comment}', [commentPostController::class, 'reply']);
 
 /*
 いいね機能
 */
-Route::get('/likes',[likePostController::class,'index']);
-Route::post('/likes/post',[likePostController::class,'store']);
-Route::delete('/delete/post/{post}',[likePostController::class,'destroy']);
+Route::get('/likes', [likePostController::class, 'index']);
+Route::post('/likes/post', [likePostController::class, 'store']);
+Route::delete('/delete/post/{post}', [likePostController::class, 'destroy']);
 //{post}でインスタンス変数$postのidを取得
-Route::post('/like/{post}',[likePostController::class,'like']);
-Route::delete('/unlike/{post}',[likePostController::class,'unlike']);
+Route::post('/like/{post}', [likePostController::class, 'like']);
+Route::delete('/unlike/{post}', [likePostController::class, 'unlike']);
 
 /*
 フォロー機能
 */
-Route::get('/follows',[userFollowController::class,'index']);
+Route::get('/follows', [userFollowController::class, 'index']);
 //ルートパラメータにはコントローラに渡す必要があるフォローされる人のidが入る。
-Route::post('/follow/{user}',[userFollowController::class,'follow']);
-Route::post('/unfollow/{user}',[userFollowController::class,'unfollow']);
+Route::post('/follow/{user}', [userFollowController::class, 'follow']);
+Route::post('/unfollow/{user}', [userFollowController::class, 'unfollow']);
 
+Route::get('/ogp', [OgpController::class, 'index']);
+Route::post('/post/url', [OgpController::class, 'store']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -64,14 +67,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 //adminルート
-Route::prefix('admin')->name('admin.')->group(function(){
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->middleware(['auth:admin', 'verified'])->name('dashboard');
     Route::middleware('auth:admin')->group(function () {
-        // Route::get('/only/admin', function () {
-        //     return view('admin');
-        // });
+        Route::get('/only', function () {
+            return view('test');
+        });
         Route::get('/only', function () {
             return view('admin.admin');
         });
@@ -80,7 +83,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');
     });
 
-    require __DIR__.'/admin.php';
+    require __DIR__ . '/admin.php';
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
